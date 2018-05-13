@@ -13,14 +13,20 @@ var app = function() {
         }
     };
 
+    self.addPostButton = function(){
+        self.vue.isAddingMemo = true;
+    };
+
     // Complete as needed.
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
+            isAddingMemo: false
         },
         methods: {
+            addPostButton: self.addPostButton
         }
 
     });
