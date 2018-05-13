@@ -11,14 +11,22 @@
 
     <div id="vue-div" class="display:none">
         <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
-    
-    
-        <div class="add_btn">
-            <a class="btn rounded" href="">
-                <i class="fa fa-plus"></i>
-                ADD
-            </a>
+        
+        <!-- form to add a memo -->
+        <div v-if="isAddingMemo" id=addMemoForm>
+            <textarea placeholder="add memo"></textarea>
         </div>
+
+
+        <div id="add_btn">
+            <button v-on:click="addPostButton">Add</button>
+            <!-- <a class="btn rounded" href=""> -->
+                <!-- <i class="fa fa-plus"></i> -->
+                <!-- ADD -->
+            <!-- </a> -->
+            <!-- <textarea placeholder="add memo"></textarea> -->
+        </div>
+
         <div class="memo">
             <div class="memo_text">
                 
