@@ -13,9 +13,31 @@ var app = function() {
         }
     };
 
-    self.addPostButton = function(){
+    self.addMemoButton = function(){
         self.vue.isAddingMemo = true;
     };
+
+    self.cancelAddButton = function(){
+        self.vue.form_title = "";
+        self.vue.form_text  = "";
+        self.vue.isAddingMemo = false;
+    };
+
+    self.addMemo = function(){
+        $.post(addMemo_url,
+            {
+                title: self.vue.form_title,
+                text:  self.vue.form_text,
+                insetion_id: self.insertion_id
+            },
+            function (data){
+                self.vue.isAddingMemo = false;
+                self.vue.form_title = "";
+                self.vue.form_text = "";
+            }
+        );
+    };
+
 
     // Complete as needed.
     self.vue = new Vue({
@@ -23,10 +45,15 @@ var app = function() {
         delimiters: ['${', '}'],
         unsafeDelimiters: ['!{', '}'],
         data: {
-            isAddingMemo: false
+            isAddingMemo: false,
+            form_title: null,
+            form_text: null
         },
         methods: {
-            addPostButton: self.addPostButton
+            addMemoButton: self.addMemoButton,
+            cancelAddButton: self.cancelAddButton,
+            addMemo: self.addMemo,
+
         }
 
     });

@@ -4,6 +4,7 @@
 <script src="{{=URL('static', 'js/vue.js')}}"></script>
 <script>
     var my_url = "{{=URL('api', 'my_method')}}";
+    var addMemo_url = "{{URL('api', 'addMemo_url', user_signature=True)}}";
 </script>
 {{end}}
 
@@ -13,13 +14,36 @@
         <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
         
         <!-- form to add a memo -->
-        <div v-if="isAddingMemo" id=addMemoForm>
-            <textarea placeholder="add memo"></textarea>
+        <!-- <div v-if="isAddingMemo" id=addMemoForm> -->
+        <!--     <textarea v-model="title" placeholder="title"></textarea> -->
+        <!--     <textarea v-model="text" placeholder="memo text"></textarea> -->
+        <!--     <button v-on:click="cancelAddButton">Cancel</button> -->
+        <!--     <button>Post</button> -->
+        <!-- </div> -->
+
+
+        <div v-if="isAddingMemo" id="addMemoForm">
+            <form action="#" v-on:submit.prevent class="form-horizontal" enctype="multipart/form-data" method="post">
+                <div class="form-group" id="title_row">
+                    <div>
+                        <input class="form-control string" id="title" v-model="form_title" placeholder="title" type="text" />
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="form-group" id="text_row">
+                    <div>
+                        <input class="orm-control string" id="text" name="album" type="text" v-model="form_text" placeholder="text"/>
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                
+                <button v-on:click="cancelAddButton">Cancel</button>
+                <button v-on:click="addMemo">Post</button>
+            </form>
         </div>
-
-
-        <div id="add_btn">
-            <button v-on:click="addPostButton">Add</button>
+        
+        <div v-if="!isAddingMemo" id="add_btn">
+            <button v-on:click="addMemoButton">Add</button>
             <!-- <a class="btn rounded" href=""> -->
                 <!-- <i class="fa fa-plus"></i> -->
                 <!-- ADD -->
